@@ -105,6 +105,12 @@ typedef enum {
     wifi_event_radius_eap_failure,
     wifi_event_radius_fallback_and_failover,
     wifi_event_type_csi_data,
+<<<<<<< HEAD
+=======
+    wifi_event_br_report,
+    wifi_event_hal_csa_beacon_frame,
+    wifi_event_hal_wps_results,
+>>>>>>> 4336bf2 (DTMESH-496: Add WPS results callback registration API (#637))
     wifi_event_hal_max,
 
     // Commands
