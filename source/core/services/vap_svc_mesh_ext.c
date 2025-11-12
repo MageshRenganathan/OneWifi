@@ -1777,10 +1777,15 @@ int process_ext_sta_conn_status(vap_svc_t *svc, void *arg)
         }
         if (ext->conn_state == connection_state_connected) {
             //After moving to connected state, check if there is another sta interface in connected state.
+	    wifi_util_info_print(WIFI_CTRL, "%s:%d MR: Ext connected via vap:%d -- In connected state\n", __func__, __LINE__, temp_vap_info->vap_index);
             for (i = 0; i < getNumberRadios(); i++) {
                 vap_map = &mgr->radio_config[i].vaps.vap_map;
                 for (j = 0; j< vap_map->num_vaps; j++) {
                     //Check for the station vaps and connect_status
+		    wifi_util_info_print(WIFI_CTRL, "%s:%d MR: Cond 1:%d 2:%d 3:%d --\n", __func__, __LINE__,
+				    (vap_svc_is_mesh_ext(vap_map->vap_array[j].vap_index) == true),
+				    (vap_map->vap_array[j].vap_index != temp_vap_info->vap_index),
+				    (vap_map->vap_array[j].u.sta_info.conn_status == wifi_connection_status_connected));
                     if ((vap_svc_is_mesh_ext(vap_map->vap_array[j].vap_index) == true) &&
                             (vap_map->vap_array[j].vap_index != temp_vap_info->vap_index) &&
                             (vap_map->vap_array[j].u.sta_info.conn_status == wifi_connection_status_connected)) {
